@@ -10,6 +10,7 @@ const cartRoutes = require('./routes/cart.routes');
 const productRoutes = require('./routes/product.routes');
 const orderRoutes = require('./routes/order.routes')
 const authMiddleware = require('./middlewares/auth');
+const exportRoutes = require('./routes/export.routes');
 
 db.sequelize.authenticate()
     .then(() => console.log("Database berhasil tersambung"))
@@ -20,6 +21,7 @@ app.use('/uploads', express.static('uploads'));
 app.use('/login', loginRoutes);
 app.use('/cart', cartRoutes);
 app.use('/orders', orderRoutes);
+app.use('/export', exportRoutes);
 
 app.use('/auth', authRoutes);
 app.use('/products', authMiddleware, productRoutes);
