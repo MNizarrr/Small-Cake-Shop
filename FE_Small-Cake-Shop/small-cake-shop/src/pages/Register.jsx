@@ -1,36 +1,35 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { register } from '../services/api'
-import { MdOutlineCake } from 'react-icons/md'
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { register } from "../services/api";
+import { MdOutlineCake } from "react-icons/md";
 
 export default function Register() {
-  const navigate = useNavigate()
-  const [form, setForm] = useState({ name: '', email: '', password: '' })
-  const [error, setError] = useState('')
-  const [loading, setLoading] = useState(false)
+  const navigate = useNavigate();
+  const [form, setForm] = useState({ name: "", email: "", password: "" });
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
-  }
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError('')
-    setLoading(true)
+    e.preventDefault();
+    setError("");
+    setLoading(true);
     try {
-      await register(form)
-      navigate('/login')
+      await register(form);
+      navigate("/login");
     } catch (err) {
-      setError(err.response?.data?.message || 'Registrasi gagal')
+      setError(err.response?.data?.message || "Registrasi gagal");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-pink-50 px-4">
       <div className="bg-white rounded-2xl shadow-md w-full max-w-md p-8">
-
         {/* Logo */}
         <div className="flex flex-col items-center mb-6">
           <MdOutlineCake size={40} className="text-pink-500 mb-2" />
@@ -48,7 +47,9 @@ export default function Register() {
         {/* Form */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div>
-            <label className="text-sm font-medium text-gray-700 mb-1 block">Nama</label>
+            <label className="text-sm font-medium text-gray-700 mb-1 block">
+              Nama
+            </label>
             <input
               type="text"
               name="name"
@@ -61,7 +62,9 @@ export default function Register() {
           </div>
 
           <div>
-            <label className="text-sm font-medium text-gray-700 mb-1 block">Email</label>
+            <label className="text-sm font-medium text-gray-700 mb-1 block">
+              Email
+            </label>
             <input
               type="email"
               name="email"
@@ -74,7 +77,9 @@ export default function Register() {
           </div>
 
           <div>
-            <label className="text-sm font-medium text-gray-700 mb-1 block">Password</label>
+            <label className="text-sm font-medium text-gray-700 mb-1 block">
+              Password
+            </label>
             <input
               type="password"
               name="password"
@@ -91,18 +96,20 @@ export default function Register() {
             disabled={loading}
             className="bg-pink-500 hover:bg-pink-600 text-white font-semibold py-2.5 rounded-lg text-sm transition disabled:opacity-60"
           >
-            {loading ? 'Memproses...' : 'Daftar'}
+            {loading ? "Memproses..." : "Daftar"}
           </button>
         </form>
 
         <p className="text-center text-sm text-gray-500 mt-5">
-          Sudah punya akun?{' '}
-          <Link to="/login" className="text-pink-500 font-medium hover:underline">
+          Sudah punya akun?{" "}
+          <Link
+            to="/login"
+            className="text-pink-500 font-medium hover:underline"
+          >
             Masuk sekarang
           </Link>
         </p>
-
       </div>
     </div>
-  )
+  );
 }
