@@ -8,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Product.hasMany(models.CartItem, { foreignKey: 'product_id' });
-      Product.hasMany(models.OrderItem, { foreignKey: 'product_id' });
+      Product.hasMany(models.CartItem, { foreignKey: "product_id" });
+      Product.hasMany(models.OrderItem, { foreignKey: "product_id" });
     }
   }
   Product.init(
@@ -28,14 +28,14 @@ module.exports = (sequelize, DataTypes) => {
       stock: {
         type: DataTypes.INTEGER,
         allowNull: true,
-        defaultValue: null
+        defaultValue: null,
       },
       image: {
         type: DataTypes.STRING,
       },
       is_active: {
         type: DataTypes.BOOLEAN,
-        defaultValue: true
+        defaultValue: true,
       },
     },
     {

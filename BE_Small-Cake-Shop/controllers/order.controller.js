@@ -7,7 +7,7 @@ const { sequelize } = require("../models");
 module.exports = {
   // POST checkout — buat order dari isi keranjang
   checkout: async (req, res) => {
-    const t = await sequelize.transaction();    
+    const t = await sequelize.transaction();
     try {
       const { shipping_address, note } = req.body;
 
