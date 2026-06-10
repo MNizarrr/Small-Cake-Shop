@@ -1,13 +1,18 @@
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, Navigate } from "react-router-dom";
 import { register } from "../services/api";
 import { MdOutlineCake } from "react-icons/md";
 
 export default function Register() {
   const navigate = useNavigate();
+  const token = localStorage.getItem("token");
+
   const [form, setForm] = useState({ name: "", email: "", password: "" });
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+
+  // redirect jika sudah login
+  if (token) return <Navigate to="/" />;
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -30,21 +35,18 @@ export default function Register() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-pink-50 px-4">
       <div className="bg-white rounded-2xl shadow-md w-full max-w-md p-8">
-        {/* Logo */}
         <div className="flex flex-col items-center mb-6">
           <MdOutlineCake size={40} className="text-pink-500 mb-2" />
           <h1 className="text-2xl font-bold text-gray-800">Small Cake Shop</h1>
           <p className="text-gray-400 text-sm mt-1">Buat akun baru</p>
         </div>
 
-        {/* Error */}
         {error && (
           <div className="bg-red-50 text-red-500 text-sm px-4 py-2 rounded-lg mb-4 border border-red-200">
             {error}
           </div>
         )}
 
-        {/* Form */}
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
           <div>
             <label className="text-sm font-medium text-gray-700 mb-1 block">
